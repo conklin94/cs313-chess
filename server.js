@@ -9,11 +9,13 @@ const pool = new Pool({connectionString: connectionString});
 app.use(express.static("public"));
 
 app.set("views", "views");
-app.set("views engine", "ejs");
+app.set("view engine", "ejs");
 
 app.listen(port, function() {
     console.log("Listening on port number " + port);
 });
+
+app.get('/', (req, res) => res.render('pages/index'));
 
 /*app.get("/getPerson", function (req, res){
     const id = req.query.id;
