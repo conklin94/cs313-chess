@@ -6,6 +6,9 @@
     <title>Index Page</title>
   </head>
   <body>
+    <% if (typeof msg != 'undefined') { %>
+      <h2 class="error"><%=msg%></h2>
+    <% } %>
     <h1 class="welcome">Welcome</h1>
     <h2 class="welcome">Create a new game</h2>
     <form class="welcome" action="/game" method="post">

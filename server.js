@@ -38,12 +38,13 @@ function getGame (req, res) {
       else {
         const game_params = result.rows[0];
         if (typeof game_params !== 'undefined') {
+          res.render("pages/game", game_params);
           console.log(game_params);
-          res.status(200).json(game_params);
         }
         else {
           console.log("twas undefined");
-          res.render("pages/index");
+          const params = {msg: "Error: the game code you entered does not exist"};
+          res.render("pages/index", params);
         }
       }
   });

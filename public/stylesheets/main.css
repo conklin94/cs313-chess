@@ -1,11 +1,12 @@
 body {
   text-align: center;
+  background-image: url("https://schlesingerconrad.com/wp-content/uploads/2016/04/Background-Chess-light.jpg");
 }
 #header {
   text-align: left;
   padding-left: 5%;
   color: white;
-  background-color: black;
+  background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTABxbGR_VlkSs-ZurRhG6ZcKduQ231Y-ql1Mw0H4yl6io_Xmgrww");
 }
 .welcome input[type=text] {
   width: 50%;
@@ -16,4 +17,28 @@ body {
 .welcome {
   text-align: left;
   margin-left: 10%;
+}
+.error {
+  border: 1px solid red;
+  background-color: #ef6262;
+
+}
+.white {
+  background-color: white;
+  width: 100px;
+  height: 100px;
+  border: 1px solid black;
+}
+.black {
+  background-color: grey;
+  width: 100px;
+  height: 100px;
+  border: 1px solid black;
+}
+#chess_board {
+  border: 1px solid black;
+  margin-left: 10%;
+}
+a {
+  color: white;
 }
