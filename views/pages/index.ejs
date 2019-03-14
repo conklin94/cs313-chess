@@ -6,6 +6,18 @@
     <title>Index Page</title>
   </head>
   <body>
-    <h1>Welcome to multiplayer chess online</h1>
+    <h1 class="welcome">Welcome</h1>
+    <h2 class="welcome">Create a new game</h2>
+    <form class="welcome" action="/game" method="post">
+      Enter a unique code for the game:<br>
+      <input type="text" name="game_code"><br>
+      <input type="submit" value="Create">
+    </form>
+    <h2 class="welcome">Join a game</h2>
+    <form class="welcome" action="/game" method="get">
+      Enter the game's unique code:<br>
+      <input type="text" name="game_code"><br>
+      <input type="submit" value="Join">
+    </form>
   </body>
 </html>
