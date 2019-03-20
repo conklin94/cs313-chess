@@ -46,6 +46,11 @@ body {
   margin-top: 1%;
   margin-left: 10%;
 }
+#buttons {
+  text-align: left;
+  margin-left: 10%;
+  padding: 1%;
+}
 a {
   color: white;
 }

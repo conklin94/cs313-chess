@@ -6,12 +6,17 @@
     <% include ../partials/header.ejs %>
     <script src="scripts/game.js"></script>
   </head>
-  <body onload="makeBoard('<%=board%>, <%=captured_by_white%>, <%=captured_by_black%>')">
+  <body onload="makeBoard('<%=board%>', '<%=captured_by_white%>', '<%=captured_by_black%>')">
     <table>
       <tr id="captured_by_black"></tr>
     </table>
     <table id="chess_board">
     </table>
+    <div id="buttons">
+      <button onclick="submitBoard('<%=game_code%>')">Submit Board</button>
+      <button onclick="getCurrentBoard('<%=game_code%>')">Get Current Board</button>
+      <button onclick="resetBoard('<%=game_code%>')">Reset Board</button>
+    </div>
     <table>
       <tr id="captured_by_white"></tr>
     </table>
