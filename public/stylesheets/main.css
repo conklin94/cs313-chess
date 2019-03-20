@@ -35,6 +35,12 @@ body {
   height: 80px;
   border: 1px solid black;
 }
+.captured {
+  background-color: white;
+  width: 80px;
+  height: 80px;
+  border: 1px solid red;
+}
 #chess_board {
   border: 1px solid black;
   margin-top: 1%;

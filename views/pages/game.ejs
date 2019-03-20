@@ -6,88 +6,16 @@
     <% include ../partials/header.ejs %>
     <script src="scripts/game.js"></script>
   </head>
-  <body>
-    <table id="chess_board">
-      <tr>
-        <td id="h1" class="white"><script>document.write(getImage('<%=board[0]%>'))</script></td>
-        <td id="g1" class="black"><script>document.write(getImage('<%=board[1]%>'))</script></td>
-        <td id="f1" class="white"><script>document.write(getImage('<%=board[2]%>'))</script></td>
-        <td id="e1" class="black"><script>document.write(getImage('<%=board[3]%>'))</script></td>
-        <td id="d1" class="white"><script>document.write(getImage('<%=board[4]%>'))</script></td>
-        <td id="c1" class="black"><script>document.write(getImage('<%=board[5]%>'))</script></td>
-        <td id="b1" class="white"><script>document.write(getImage('<%=board[6]%>'))</script></td>
-        <td id="a1" class="black"><script>document.write(getImage('<%=board[7]%>'))</script></td>
-      </tr>
-      <tr>
-        <td id="h2" class="black"><script>document.write(getImage('<%=board[9]%>'))</script></td>
-        <td id="g2" class="white"><script>document.write(getImage('<%=board[10]%>'))</script></td>
-        <td id="f2" class="black"><script>document.write(getImage('<%=board[11]%>'))</script></td>
-        <td id="e2" class="white"><script>document.write(getImage('<%=board[12]%>'))</script></td>
-        <td id="d2" class="black"><script>document.write(getImage('<%=board[13]%>'))</script></td>
-        <td id="c2" class="white"><script>document.write(getImage('<%=board[14]%>'))</script></td>
-        <td id="b2" class="black"><script>document.write(getImage('<%=board[15]%>'))</script></td>
-        <td id="a2" class="white"><script>document.write(getImage('<%=board[16]%>'))</script></td>
-      </tr>
-      <tr>
-        <td id="h3" class="white"><script>document.write(getImage('<%=board[18]%>'))</script></td>
-        <td id="g3" class="black"><script>document.write(getImage('<%=board[19]%>'))</script></td>
-        <td id="f3" class="white"><script>document.write(getImage('<%=board[20]%>'))</script></td>
-        <td id="e3" class="black"><script>document.write(getImage('<%=board[21]%>'))</script></td>
-        <td id="d3" class="white"><script>document.write(getImage('<%=board[22]%>'))</script></td>
-        <td id="c3" class="black"><script>document.write(getImage('<%=board[23]%>'))</script></td>
-        <td id="b3" class="white"><script>document.write(getImage('<%=board[24]%>'))</script></td>
-        <td id="a3" class="black"><script>document.write(getImage('<%=board[25]%>'))</script></td>
-      </tr>
-      <tr>
-        <td id="h4" class="black"><script>document.write(getImage('<%=board[27]%>'))</script></td>
-        <td id="g4" class="white"><script>document.write(getImage('<%=board[28]%>'))</script></td>
-        <td id="f4" class="black"><script>document.write(getImage('<%=board[29]%>'))</script></td>
-        <td id="e4" class="white"><script>document.write(getImage('<%=board[30]%>'))</script></td>
-        <td id="d4" class="black"><script>document.write(getImage('<%=board[31]%>'))</script></td>
-        <td id="c4" class="white"><script>document.write(getImage('<%=board[32]%>'))</script></td>
-        <td id="b4" class="black"><script>document.write(getImage('<%=board[33]%>'))</script></td>
-        <td id="a4" class="white"><script>document.write(getImage('<%=board[34]%>'))</script></td>
-      </tr>
-      <tr>
-        <td id="h5" class="white"><script>document.write(getImage('<%=board[36]%>'))</script></td>
-        <td id="g5" class="black"><script>document.write(getImage('<%=board[37]%>'))</script></td>
-        <td id="f5" class="white"><script>document.write(getImage('<%=board[38]%>'))</script></td>
-        <td id="e5" class="black"><script>document.write(getImage('<%=board[39]%>'))</script></td>
-        <td id="d5" class="white"><script>document.write(getImage('<%=board[40]%>'))</script></td>
-        <td id="c5" class="black"><script>document.write(getImage('<%=board[41]%>'))</script></td>
-        <td id="b5" class="white"><script>document.write(getImage('<%=board[42]%>'))</script></td>
-        <td id="a5" class="black"><script>document.write(getImage('<%=board[43]%>'))</script></td>
-      </tr>
-      <tr>
-        <td id="h6" class="black"><script>document.write(getImage('<%=board[45]%>'))</script></td>
-        <td id="g6" class="white"><script>document.write(getImage('<%=board[46]%>'))</script></td>
-        <td id="f6" class="black"><script>document.write(getImage('<%=board[47]%>'))</script></td>
-        <td id="e6" class="white"><script>document.write(getImage('<%=board[48]%>'))</script></td>
-        <td id="d6" class="black"><script>document.write(getImage('<%=board[49]%>'))</script></td>
-        <td id="c6" class="white"><script>document.write(getImage('<%=board[50]%>'))</script></td>
-        <td id="b6" class="black"><script>document.write(getImage('<%=board[51]%>'))</script></td>
-        <td id="a6" class="white"><script>document.write(getImage('<%=board[52]%>'))</script></td>
-      </tr>
-      <tr>
-        <td id="h7" class="white"><script>document.write(getImage('<%=board[54]%>'))</script></td>
-        <td id="g7" class="black"><script>document.write(getImage('<%=board[55]%>'))</script></td>
-        <td id="f7" class="white"><script>document.write(getImage('<%=board[56]%>'))</script></td>
-        <td id="e7" class="black"><script>document.write(getImage('<%=board[57]%>'))</script></td>
-        <td id="d7" class="white"><script>document.write(getImage('<%=board[58]%>'))</script></td>
-        <td id="c7" class="black"><script>document.write(getImage('<%=board[59]%>'))</script></td>
-        <td id="b7" class="white"><script>document.write(getImage('<%=board[60]%>'))</script></td>
-        <td id="a7" class="black"><script>document.write(getImage('<%=board[61]%>'))</script></td>
-      </tr>
-      <tr>
-        <td id="h8" class="black"><script>document.write(getImage('<%=board[63]%>'))</script></td>
-        <td id="g8" class="white"><script>document.write(getImage('<%=board[64]%>'))</script></td>
-        <td id="f8" class="black"><script>document.write(getImage('<%=board[65]%>'))</script></td>
-        <td id="e8" class="white"><script>document.write(getImage('<%=board[66]%>'))</script></td>
-        <td id="d8" class="black"><script>document.write(getImage('<%=board[67]%>'))</script></td>
-        <td id="c8" class="white"><script>document.write(getImage('<%=board[68]%>'))</script></td>
-        <td id="b8" class="black"><script>document.write(getImage('<%=board[69]%>'))</script></td>
-        <td id="a8" class="white"><script>document.write(getImage('<%=board[70]%>'))</script></td>
-      </tr>
+  <body onload="makeBoard('<%=board%>, <%=captured_by_white%>, <%=captured_by_black%>')">
+    <table>
+      <tr id="captured_by_black"></tr>
     </table>
+    <table id="chess_board">
+    </table>
+    <table>
+      <tr id="captured_by_white"></tr>
+    </table>
+
+
   </body>
 </html>
