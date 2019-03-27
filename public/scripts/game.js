@@ -248,6 +248,23 @@ function getCapturedByWhite() {
   return captured;
 }
 
+function postComment(game_id) {
+  var comments = document.getElementById('comment').value;
+  postAjax('/comment', `game_id=${game_id}&comments=${comments}`,
+            function(data){ console.log(data); });
+}
+
+function getComments(game_id) {
+  getAjax(`/comment?game_id=${game_id}`, function(data){
+    var json = JSON.parse(data);
+    comments = document.getElementById('comments');
+    comments.innerHTML = "";
+    json.forEach(function(element) {
+      comments.innerHTML += `<li>${element['comments']}</li>`;
+    });
+  });
+}
+
 function postAjax(url, data, success) {
     var params = typeof data == 'string' ? data : Object.keys(data).map(
             function(k){ return encodeURIComponent(k) + '=' + encodeURIComponent(data[k]) }

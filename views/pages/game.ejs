@@ -6,7 +6,7 @@
     <% include ../partials/header.ejs %>
     <script src="scripts/game.js"></script>
   </head>
-  <body onload="makeBoard('<%=board%>', '<%=captured_by_white%>', '<%=captured_by_black%>')">
+  <body onload="makeBoard('<%=board%>', '<%=captured_by_white%>', '<%=captured_by_black%>');getComments('<%=game_id%>')">
     <table>
       <tr id="captured_by_black"></tr>
     </table>
@@ -20,7 +20,10 @@
     <table>
       <tr id="captured_by_white"></tr>
     </table>
-
+    <textarea id="comment" rows="4" cols="50"></textarea>
+    <button onclick="postComment('<%=game_id%>')">Submit Comment</button>
+    <ul id="comments">
+    </ul>
 
   </body>
 </html>
