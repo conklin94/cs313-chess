@@ -6,7 +6,9 @@
     <% include ../partials/header.ejs %>
     <script src="scripts/game.js"></script>
   </head>
-  <body onload="makeBoard('<%=board%>', '<%=captured_by_white%>', '<%=captured_by_black%>');getComments('<%=game_id%>')">
+  <body onload="makeBoard('<%=board%>', '<%=captured_by_white%>', '<%=captured_by_black%>');
+    getComments('<%=game_id%>');setVars('<%=count%>','<%=game_code%>','<%=game_id%>');
+    checkForUpdatedBoard();checkForUpdatedComments()">
     <table>
       <tr id="captured_by_black"></tr>
     </table>
@@ -14,14 +16,15 @@
     </table>
     <div id="buttons">
       <button onclick="submitBoard('<%=game_code%>')">Submit Board</button>
-      <button onclick="getCurrentBoard('<%=game_code%>')">Get Current Board</button>
       <button onclick="resetBoard('<%=game_code%>')">Reset Board</button>
     </div>
     <table>
       <tr id="captured_by_white"></tr>
     </table>
-    <textarea id="comment" rows="4" cols="50"></textarea>
-    <button onclick="postComment('<%=game_id%>')">Submit Comment</button>
+    <div id='post_comment'>
+      <textarea id="comment" rows="4" cols="50"></textarea><br>
+      <button onclick="postComment('<%=game_id%>')">Submit Comment</button>
+    </div>
     <ul id="comments">
     </ul>
 

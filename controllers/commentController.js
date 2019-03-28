@@ -37,7 +37,21 @@ function getComments (req, res) {
   });
 }
 
+function getMostRecentComment (req, res) {
+  var game_id = req.query.game_id;
+  commentModel.selectMostRecentComment(game_id, function (err, data) {
+    if (err) {
+      const params = {success: false, err: err};
+      res.send(params);
+    }
+    else {
+      res.send(data);
+    }
+  });
+}
+
 module.exports = {
   getComments: getComments,
-  addComment: addComment
+  addComment: addComment,
+  getMostRecentComment: getMostRecentComment
 };

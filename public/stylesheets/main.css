@@ -58,3 +58,12 @@ a {
   width: 60px;
   height: 60px;
 }
+#post_comment {
+  text-align: left;
+  margin-left: 10%;
+}
+ul {
+  text-align: left;
+  margin-left: 10%;
+  list-style-position: inside;
+}

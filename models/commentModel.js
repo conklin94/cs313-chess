@@ -27,7 +27,21 @@ function insertComment (game_id, comments, time, callback) {
   });
 }
 
+function selectMostRecentComment (game_id, callback) {
+  pool.query('SELECT time FROM comments WHERE game_id = $1 ORDER BY time DESC LIMIT 1',
+              [game_id], (err, result) => {
+    if (err) {
+      callback(err, null);
+    }
+    else {
+      const game_params = result.rows[0];
+      callback(null, game_params);
+    }
+  });
+}
+
 module.exports = {
   insertComment: insertComment,
-  selectComments: selectComments
+  selectComments: selectComments,
+  selectMostRecentComment: selectMostRecentComment
 };

@@ -72,9 +72,22 @@ function getBoard (req, res) {
   });
 }
 
+function getCount (req, res) {
+  var game_code = req.query.game_code;
+  gameModel.selectCount(game_code, function (err, data) {
+      if (err) {
+        res.send({err: err});
+      }
+      else {
+        res.send(data);
+      }
+  });
+}
+
 module.exports = {
   getGame: getGame,
   createGame: createGame,
   updateBoard: updateBoard,
-  getBoard: getBoard
+  getBoard: getBoard,
+  getCount: getCount
 };

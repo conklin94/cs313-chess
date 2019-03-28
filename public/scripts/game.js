@@ -1,3 +1,8 @@
+var global_count = 0;
+var global_id = 0;
+var global_code = "";
+var global_time;
+
 function getImage(piece) {
   var image = "";
   switch(piece) {
@@ -196,6 +201,7 @@ function getCurrentBoard(game_code) {
     var board = json['board'];
     var captured_by_white = json['captured_by_white'];
     var captured_by_black = json['captured_by_black'];
+    global_count = json['count'];
     makeBoard(board, captured_by_white, captured_by_black);
   });
 }
@@ -250,6 +256,7 @@ function getCapturedByWhite() {
 
 function postComment(game_id) {
   var comments = document.getElementById('comment').value;
+  document.getElementById('comment').value = "";
   postAjax('/comment', `game_id=${game_id}&comments=${comments}`,
             function(data){ console.log(data); });
 }
@@ -259,10 +266,39 @@ function getComments(game_id) {
     var json = JSON.parse(data);
     comments = document.getElementById('comments');
     comments.innerHTML = "";
+    global_time = json[0]['time'];
     json.forEach(function(element) {
       comments.innerHTML += `<li>${element['comments']}</li>`;
     });
   });
+}
+
+function setVars(count, game_code, game_id) {
+  global_count = count;
+  global_code = game_code;
+  global_id = game_id;
+}
+
+function checkForUpdatedBoard() {
+  setInterval(function () {
+    getAjax(`/game_count?game_code=${global_code}`, function(data){
+      var json = JSON.parse(data);
+      if (json['count'] != global_count) {
+        getCurrentBoard(global_code);
+      }
+    });
+  }, 2000); // Every 2 seconds check to see if the board has changed
+}
+
+function checkForUpdatedComments() {
+  setInterval(function () {
+    getAjax(`/most_recent_comment?game_id=${global_id}`, function(data){
+      var json = JSON.parse(data);
+      if (json['time'] != global_time) {
+        getComments(global_id);
+      }
+    });
+  }, 2000); // Every 2 seconds check to see if the comments have changed
 }
 
 function postAjax(url, data, success) {

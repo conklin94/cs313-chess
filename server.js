@@ -26,5 +26,7 @@ app.get('/game', gameController.getGame);
 app.post('/game', gameController.createGame);
 app.get('/board', gameController.getBoard);
 app.post('/board', gameController.updateBoard);
-app.post('/comment', commentController.addComment);
+app.get('/game_count', gameController.getCount);
 app.get('/comment', commentController.getComments);
+app.post('/comment', commentController.addComment);
+app.get('/most_recent_comment', commentController.getMostRecentComment);
