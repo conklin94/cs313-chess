@@ -6,11 +6,13 @@
     <% include ../partials/header.ejs %>
     <script src="scripts/game.js"></script>
   </head>
-  <body onload="makeBoard('<%=board%>', '<%=captured_by_white%>', '<%=captured_by_black%>');
-    getComments('<%=game_id%>');setVars('<%=count%>','<%=game_code%>','<%=game_id%>');
-    checkForUpdatedBoard();checkForUpdatedComments()">
+  <body onload="initialize('<%=game_id%>', '<%=game_code%>', '<%=count%>',
+    '<%=board%>', '<%=captured_by_white%>', '<%=captured_by_black%>')">
     <table>
       <tr id="captured_by_black"></tr>
+    </table>
+    <table class="add">
+      <tr id="add_to_black"></tr>
     </table>
     <table id="chess_board">
     </table>
@@ -18,12 +20,15 @@
       <button onclick="submitBoard('<%=game_code%>')">Submit Board</button>
       <button onclick="resetBoard('<%=game_code%>')">Reset Board</button>
     </div>
+    <table class="add">
+      <tr id="add_to_white"></tr>
+    </table>
     <table>
       <tr id="captured_by_white"></tr>
     </table>
     <div id='post_comment'>
       <textarea id="comment" rows="4" cols="50"></textarea><br>
-      <button onclick="postComment('<%=game_id%>')">Submit Comment</button>
+      <button onclick="postComment('<%=game_id%>')">Send Message</button>
     </div>
     <ul id="comments">
     </ul>

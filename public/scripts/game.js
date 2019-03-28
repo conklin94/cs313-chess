@@ -2,6 +2,7 @@ var global_count = 0;
 var global_id = 0;
 var global_code = "";
 var global_time;
+var global_piece = 0;
 
 function getImage(piece) {
   var image = "";
@@ -48,6 +49,16 @@ function getImage(piece) {
   return image;
 }
 
+function initialize(game_id, game_code, count, board, captured_by_white, captured_by_black) {
+  makeBoard(board, captured_by_white, captured_by_black);
+  getComments(game_id);
+  setVars(count, game_code, game_id);
+  fillAddToWhite();
+  fillAddToBlack();
+  checkForUpdatedBoard();
+  checkForUpdatedComments();
+}
+
 function makeBoard(board, captured_by_white, captured_by_black) {
   if (board.length < 71) {
     console.log("The stored chess board is invalid");
@@ -57,7 +68,6 @@ function makeBoard(board, captured_by_white, captured_by_black) {
   var is_white = true;
   var cell = 0;
   var row = 0;
-  var piece = 0;
   var white_jail = document.getElementById('captured_by_white');
   var black_jail = document.getElementById('captured_by_black');
   white_jail.innerHTML = "";
@@ -65,25 +75,22 @@ function makeBoard(board, captured_by_white, captured_by_black) {
   for (var i = 0; i < captured_by_white.length; i++) {
     var letter = captured_by_white.charAt(i);
     var image = getImage(letter);
-    var imageHTML = `<img id="piece${piece}" src='${image}' `
+    var imageHTML = `<img src='${image}' id="piece${global_piece}" `
                   + `alt='${letter}' ondragstart="drag(event)"`
                   + ` draggable="true">`;
-    white_jail.innerHTML += `<td class="captured" ondrop="drop(event)"`
-                         + ` ondragover="allowDrop(event)">`
+    white_jail.innerHTML += `<td class="captured">`
                          + `${imageHTML}</td>`;
-    piece += 1;
-
+    global_piece++;
   }
   for (var i = 0; i < captured_by_black.length; i++) {
     var letter = captured_by_black.charAt(i);
     var image = getImage(letter);
-    var imageHTML = `<img id="piece${piece}" src='${image}' `
+    var imageHTML = `<img src='${image}' id="piece${global_piece}" `
                   + `alt='${letter}' ondragstart="drag(event)"`
                   + ` draggable="true">`;
-    black_jail.innerHTML += `<td class="captured" ondrop="drop(event)"`
-                         + ` ondragover="allowDrop(event)">`
+    black_jail.innerHTML += `<td class="captured">`
                          + `${imageHTML}</td>`;
-    piece += 1;
+    global_piece++;
   }
 
   chess_board.innerHTML = "";
@@ -98,10 +105,10 @@ function makeBoard(board, captured_by_white, captured_by_black) {
       var image = getImage(board.charAt(i));
       var imageHTML = "";
       if (image.length > 0) {
-        imageHTML = `<img id="piece${piece}" src='${image}' `
+        imageHTML = `<img src='${image}' id="piece${global_piece}" `
                   + `alt='${board.charAt(i)}' ondragstart="drag(event)"`
                   + ` draggable="true">`;
-        piece += 1;
+        global_piece++;
       }
       board_string += `<td id="cell${cell}" class='`
                    + ((is_white) ? 'white' : 'black')
@@ -113,6 +120,36 @@ function makeBoard(board, captured_by_white, captured_by_black) {
   }
   board_string += "</tr>";
   chess_board.innerHTML = board_string;
+}
+
+function fillAddToWhite() {
+  const white_pieces = "QRBNP";
+  var add_to_white = document.getElementById('add_to_white')
+  for (var i = 0; i < white_pieces.length; i++) {
+    var letter = white_pieces.charAt(i);
+    var image = getImage(letter);
+    var imageHTML = `<img src='${image}' id="piece${global_piece}" `
+                  + `alt='${letter}' ondragstart="drag(event)"`
+                  + ` draggable="true">`;
+    add_to_white.innerHTML += `<td class="add_piece">`
+                         + `${imageHTML}</td>`;
+    global_piece++;
+  }
+}
+
+function fillAddToBlack() {
+  const black_pieces = "qrbnp";
+  var add_to_black = document.getElementById('add_to_black')
+  for (var i = 0; i < black_pieces.length; i++) {
+    var letter = black_pieces.charAt(i);
+    var image = getImage(letter);
+    var imageHTML = `<img src='${image}' id="piece${global_piece}" `
+                  + `alt='${letter}' ondragstart="drag(event)"`
+                  + ` draggable="true">`;
+    add_to_black.innerHTML += `<td class="add_piece">`
+                         + `${imageHTML}</td>`;
+    global_piece++;
+  }
 }
 
 function drag(ev) {
@@ -128,13 +165,23 @@ function drop(ev) {
   var data = ev.dataTransfer.getData("text");
   var captured = null;
   var image = document.getElementById(data);
+  var is_white = false;
   if (image.parentNode == ev.target || image == ev.target) {
     return;
+  }
+  if (image.alt == image.alt.toUpperCase()) {
+    is_white = true;
   }
   // Delete the td tag if the piece is brought back onto the board
   if (image.parentNode.parentNode.id == "captured_by_black"
       || image.parentNode.parentNode.id == "captured_by_white") {
     image.parentNode.parentNode.removeChild(image.parentNode);
+  }
+  else if (image.parentNode.parentNode.id == "add_to_black"
+      || image.parentNode.parentNode.id == "add_to_white") {
+    image = image.cloneNode(true);
+    image.id = `piece${global_piece}`;
+    global_piece++;
   }
   console.log();
   if (ev.target.hasChildNodes()) {
@@ -150,24 +197,29 @@ function drop(ev) {
   else {
     ev.target.appendChild(image);
   }
-  handleCaptured(captured);
+  handleCaptured(captured, is_white);
 }
 
-function handleCaptured(captured) {
+function handleCaptured(captured, is_white) {
   captured_by_black = document.getElementById('captured_by_black');
   captured_by_white = document.getElementById('captured_by_white');
   if (captured === null) {
     return "";
   }
   if (captured.alt == captured.alt.toUpperCase()) {
-    captured_by_black.innerHTML += `<td class="captured" ondrop="drop(event)"`
-                                + ` ondragover="allowDrop(event)">`
-                                + `${captured.outerHTML}</td>`;
+    if (!is_white) {
+      captured_by_black.innerHTML += `<td class="captured" ondrop="drop(event)"`
+                                  + ` ondragover="allowDrop(event)">`
+                                  + `${captured.outerHTML}</td>`;
+    }
   }
   else {
-    captured_by_white.innerHTML += `<td class="captured" ondrop="drop(event)"`
-                                + ` ondragover="allowDrop(event)">`
-                                + `${captured.outerHTML}</td>`;
+    if (is_white) {
+      captured_by_white.innerHTML += `<td class="captured" ondrop="drop(event)"`
+                                  + ` ondragover="allowDrop(event)">`
+                                  + `${captured.outerHTML}</td>`;
+    }
+
   }
 }
 
@@ -261,12 +313,14 @@ function postComment(game_id) {
             function(data){ console.log(data); });
 }
 
-function getComments(game_id) {
+function getComments(game_id, callback) {
   getAjax(`/comment?game_id=${game_id}`, function(data){
     var json = JSON.parse(data);
     comments = document.getElementById('comments');
     comments.innerHTML = "";
-    global_time = json[0]['time'];
+    if (json[0]) {
+      global_time = json[0]['time'];
+    }
     json.forEach(function(element) {
       comments.innerHTML += `<li>${element['comments']}</li>`;
     });
@@ -293,9 +347,11 @@ function checkForUpdatedBoard() {
 function checkForUpdatedComments() {
   setInterval(function () {
     getAjax(`/most_recent_comment?game_id=${global_id}`, function(data){
-      var json = JSON.parse(data);
-      if (json['time'] != global_time) {
-        getComments(global_id);
+      if (data) {
+        var json = JSON.parse(data);
+        if (json['time'] != global_time) {
+          getComments(global_id);
+        }
       }
     });
   }, 2000); // Every 2 seconds check to see if the comments have changed
