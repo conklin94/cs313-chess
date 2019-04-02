@@ -322,9 +322,16 @@ function getComments(game_id, callback) {
       global_time = json[0]['time'];
     }
     json.forEach(function(element) {
-      comments.innerHTML += `<li>${element['comments']}</li>`;
+      comments.innerHTML += `<li>${element['comments']}</li>`
+      + `<button onclick="deleteComment('${element['comment_id']}')"`
+      + `>Delete Comment</button><br><br>`;
     });
   });
+}
+
+function deleteComment(comment_id) {
+  postAjax('/delete_comment', `comment_id=${comment_id}`,
+            function(data){ console.log(data); });
 }
 
 function setVars(count, game_code, game_id) {

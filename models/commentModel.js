@@ -40,8 +40,21 @@ function selectMostRecentComment (game_id, callback) {
   });
 }
 
+function deleteFromComments(comment_id, callback) {
+  pool.query('DELETE FROM comments WHERE comment_id = $1',
+              [comment_id], (err, result) => {
+    if (err) {
+      callback(err);
+    }
+    else {
+      callback(null);
+    }
+  });
+}
+
 module.exports = {
   insertComment: insertComment,
   selectComments: selectComments,
-  selectMostRecentComment: selectMostRecentComment
+  selectMostRecentComment: selectMostRecentComment,
+  deleteFromComments: deleteFromComments
 };

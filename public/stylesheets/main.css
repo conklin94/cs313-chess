@@ -72,5 +72,9 @@ a {
 ul {
   text-align: left;
   margin-left: 10%;
-  list-style-position: inside;
+  margin-right: 50%;
+  list-style-type: none;
+}
+li {
+  border-bottom: 1px solid black;
 }

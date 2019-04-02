@@ -50,8 +50,23 @@ function getMostRecentComment (req, res) {
   });
 }
 
+function deleteComment (req, res) {
+  var comment_id = req.body.comment_id;
+  commentModel.deleteFromComments(comment_id, function (err) {
+    if (err) {
+      const params = {success: false, err: err};
+      res.send(params);
+    }
+    else {
+      const params = {success: true};
+      res.send(params);
+    }
+  });
+}
+
 module.exports = {
   getComments: getComments,
   addComment: addComment,
-  getMostRecentComment: getMostRecentComment
+  getMostRecentComment: getMostRecentComment,
+  deleteComment: deleteComment
 };

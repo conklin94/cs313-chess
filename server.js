@@ -29,4 +29,5 @@ app.post('/board', gameController.updateBoard);
 app.get('/game_count', gameController.getCount);
 app.get('/comment', commentController.getComments);
 app.post('/comment', commentController.addComment);
+app.post('/delete_comment', commentController.deleteComment);
 app.get('/most_recent_comment', commentController.getMostRecentComment);
