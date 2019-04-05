@@ -7,16 +7,17 @@
     <script src="scripts/game.js"></script>
   </head>
   <body onload="initialize('<%=game_id%>', '<%=game_code%>', '<%=count%>',
-    '<%=board%>', '<%=captured_by_white%>', '<%=captured_by_black%>')"
-    ondrop="drop(event)" ondragover="allowDrop(event)">
+    '<%=board%>', '<%=captured_by_white%>', '<%=captured_by_black%>')">
     <table>
       <tr id="captured_by_black"></tr>
     </table>
     <table class="add">
       <tr id="add_to_black"></tr>
     </table>
-    <table id="chess_board">
-    </table>
+    <span id="outer_board" ondrop="drop(event)" ondragover="allowDrop(event)">
+      <table id="chess_board">
+      </table>
+    </span>
     <div id="buttons">
       <button onclick="submitBoard('<%=game_code%>')">Submit Board</button>
       <button onclick="resetBoard('<%=game_code%>')">Reset Board</button>

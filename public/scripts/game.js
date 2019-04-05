@@ -183,7 +183,7 @@ function drop(ev) {
     image.id = `piece${global_piece}`;
     global_piece++;
   }
-  if (ev.target.tagName == "BODY") {
+  if (ev.target.id == "outer_board") {
     image.parentNode.removeChild(image);
     return;
   }
