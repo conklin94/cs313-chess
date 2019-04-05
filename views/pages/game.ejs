@@ -7,7 +7,8 @@
     <script src="scripts/game.js"></script>
   </head>
   <body onload="initialize('<%=game_id%>', '<%=game_code%>', '<%=count%>',
-    '<%=board%>', '<%=captured_by_white%>', '<%=captured_by_black%>')">
+    '<%=board%>', '<%=captured_by_white%>', '<%=captured_by_black%>')"
+    ondrop="drop(event)" ondragover="allowDrop(event)">
     <table>
       <tr id="captured_by_black"></tr>
     </table>

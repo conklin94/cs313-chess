@@ -183,7 +183,10 @@ function drop(ev) {
     image.id = `piece${global_piece}`;
     global_piece++;
   }
-  console.log();
+  if (ev.target.tagName == "BODY") {
+    image.parentNode.removeChild(image);
+    return;
+  }
   if (ev.target.hasChildNodes()) {
     var captured = ev.target.childNodes[0];
     ev.target.innerHTML = "";
