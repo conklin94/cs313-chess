@@ -72,25 +72,29 @@ function makeBoard(board, captured_by_white, captured_by_black) {
   var black_jail = document.getElementById('captured_by_black');
   white_jail.innerHTML = "";
   black_jail.innerHTML = "";
-  for (var i = 0; i < captured_by_white.length; i++) {
-    var letter = captured_by_white.charAt(i);
-    var image = getImage(letter);
-    var imageHTML = `<img src='${image}' id="piece${global_piece}" `
-                  + `alt='${letter}' ondragstart="drag(event)"`
-                  + ` draggable="true">`;
-    white_jail.innerHTML += `<td class="captured">`
-                         + `${imageHTML}</td>`;
-    global_piece++;
+  if (captured_by_white != null) {
+    for (var i = 0; i < captured_by_white.length; i++) {
+      var letter = captured_by_white.charAt(i);
+      var image = getImage(letter);
+      var imageHTML = `<img src='${image}' id="piece${global_piece}" `
+                    + `alt='${letter}' ondragstart="drag(event)"`
+                    + ` draggable="true">`;
+      white_jail.innerHTML += `<td class="captured">`
+                           + `${imageHTML}</td>`;
+      global_piece++;
+    }
   }
-  for (var i = 0; i < captured_by_black.length; i++) {
-    var letter = captured_by_black.charAt(i);
-    var image = getImage(letter);
-    var imageHTML = `<img src='${image}' id="piece${global_piece}" `
-                  + `alt='${letter}' ondragstart="drag(event)"`
-                  + ` draggable="true">`;
-    black_jail.innerHTML += `<td class="captured">`
-                         + `${imageHTML}</td>`;
-    global_piece++;
+  if (captured_by_black != null) {
+    for (var i = 0; i < captured_by_black.length; i++) {
+      var letter = captured_by_black.charAt(i);
+      var image = getImage(letter);
+      var imageHTML = `<img src='${image}' id="piece${global_piece}" `
+                    + `alt='${letter}' ondragstart="drag(event)"`
+                    + ` draggable="true">`;
+      black_jail.innerHTML += `<td class="captured">`
+                           + `${imageHTML}</td>`;
+      global_piece++;
+    }
   }
 
   chess_board.innerHTML = "";

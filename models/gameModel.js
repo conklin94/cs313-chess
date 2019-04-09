@@ -16,7 +16,7 @@ function selectGame (game_code, callback) {
 }
 
 function insertGame (game_code, board, callback) {
-  pool.query('INSERT INTO game (game_code, board) VALUES ($1, $2)',
+  pool.query('INSERT INTO game (game_code, board, count) VALUES ($1, $2, 1)',
               [game_code, board], (err, result) => {
      if (err) {
        callback(err);
